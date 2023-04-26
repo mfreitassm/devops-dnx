@@ -1,0 +1,41 @@
+[
+  {
+    "name": "laravel-app",
+    "image": "774358786862.dkr.ecr.ap-southeast-2.amazonaws.com/laravel-docker:latest",
+    "cpu": 10,
+    "memory": 256,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 80
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group" : "/ecs/laravel-container",
+        "awslogs-region": "ap-southeast-2"
+      }
+    },
+    "secrets": [
+      {
+        "name": "APP_KEY",
+        "valueFrom": "arn:aws:ssm:ap-southeast-2:774358786862:parameter/APP_KEY"
+      },
+      {
+        "name": "DB_HOST",
+        "valueFrom": "arn:aws:ssm:ap-southeast-2:774358786862:parameter/DB_HOST"
+      },
+      {
+        "name": "DB_USERNAME",
+        "valueFrom": "arn:aws:ssm:ap-southeast-2:774358786862:parameter/DB_USERNAME"
+      },
+      {
+        "name": "DB_PASSWORD",
+        "valueFrom": "arn:aws:ssm:ap-southeast-2:774358786862:parameter/DB_PASSWORD"
+      }
+    ]
+  }
+]
+
